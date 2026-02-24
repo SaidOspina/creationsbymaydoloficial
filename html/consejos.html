@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consejos — Creations By Maydol</title>
+  <link rel="icon" href="https://i.ibb.co/6RNGswh4/logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --nude-100: #FAF6F1;
+      --nude-200: #F3ECE2;
+      --nude-300: #E8DDD0;
+      --nude-400: #D4C4AE;
+      --nude-500: #C2AD91;
+      --nude-600: #A8906E;
+      --nude-700: #8B7355;
+      --nude-800: #6B573F;
+      --nude-900: #4A3B2A;
+      --cream: #FFFBF5;
+      --warm-white: #FEFCF9;
+      --text-primary: #3A2E22;
+      --text-secondary: #6B5D4F;
+      --text-light: #9A8B7A;
+      --accent-gold: #C4A265;
+      --accent-rose: #D4A59A;
+      --border: rgba(180, 160, 130, 0.2);
+      --shadow-sm: 0 2px 8px rgba(74, 59, 42, 0.06);
+      --shadow-md: 0 4px 20px rgba(74, 59, 42, 0.08);
+      --shadow-lg: 0 8px 40px rgba(74, 59, 42, 0.12);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Jost', sans-serif;
+      --transition: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--cream); color: var(--text-primary); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+    /* ── TOP BAR ── */
+    .top-bar { background: var(--nude-900); color: var(--nude-200); text-align: center; padding: 10px 20px; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
+
+    /* ── HEADER ── */
+    header { position: sticky; top: 0; z-index: 1000; background: rgba(255,251,245,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: box-shadow 0.3s var(--transition); }
+    header.scrolled { box-shadow: var(--shadow-md); }
+    .header-inner { max-width: 1320px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 80px; }
+    .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text-primary); }
+    .logo img { height: 52px; width: 52px; object-fit: contain; border-radius: 50%; }
+    .logo-text { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; letter-spacing: 1px; line-height: 1.2; }
+    .logo-text span { display: block; font-size: 0.65rem; font-family: var(--font-body); letter-spacing: 4px; text-transform: uppercase; color: var(--text-light); font-weight: 400; margin-top: 2px; }
+    nav { display: flex; align-items: center; gap: 6px; }
+    nav a { text-decoration: none; color: var(--text-secondary); font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 400; padding: 8px 18px; border-radius: 100px; transition: all 0.3s var(--transition); }
+    nav a:hover, nav a.active { color: var(--text-primary); background: var(--nude-200); }
+    nav a.active { font-weight: 500; }
+    .nav-cart { position: relative; display: flex; align-items: center; gap: 6px; }
+    .cart-badge { background: var(--accent-gold); color: white; font-size: 0.65rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; }
+    .mobile-toggle { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 24px; position: relative; z-index: 1001; }
+    .mobile-toggle span { display: block; width: 100%; height: 1.5px; background: var(--text-primary); position: absolute; left: 0; transition: all 0.3s var(--transition); }
+    .mobile-toggle span:nth-child(1) { top: 0; }
+    .mobile-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .mobile-toggle span:nth-child(3) { bottom: 0; }
+    .mobile-toggle.open span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+    .mobile-toggle.open span:nth-child(2) { opacity: 0; }
+    .mobile-toggle.open span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+    /* ── PAGE HERO ── */
+    .page-hero { position: relative; height: 340px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; }
+    .page-hero-bg { position: absolute; inset: 0; }
+    .page-hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) saturate(0.7); }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(74,59,42,0.5), rgba(58,46,34,0.75)); }
+    .page-hero-content { position: relative; z-index: 2; padding: 0 40px; }
+    .page-hero-breadcrumb { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 16px; opacity: 0; animation: fadeUp 0.6s var(--transition) 0.2s forwards; }
+    .page-hero-breadcrumb a { color: rgba(250,246,241,0.6); text-decoration: none; transition: color 0.3s; }
+    .page-hero-breadcrumb a:hover { color: var(--cream); }
+    .page-hero-title { font-family: var(--font-display); font-size: clamp(2.4rem,4vw,3.6rem); font-weight: 300; color: var(--cream); line-height: 1.15; opacity: 0; animation: fadeUp 0.6s var(--transition) 0.35s forwards; }
+    .page-hero-title em { font-style: italic; font-weight: 400; color: var(--accent-gold); }
+    .page-hero-subtitle { font-size: 0.95rem; color: rgba(250,246,241,0.65); margin-top: 14px; font-weight: 300; max-width: 520px; margin-left: auto; margin-right: auto; opacity: 0; animation: fadeUp 0.6s var(--transition) 0.5s forwards; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 90px 40px; }
+    .section-inner { max-width: 1320px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-tag { font-size: 0.72rem; letter-spacing: 5px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 16px; font-weight: 400; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2rem,3.5vw,3rem); font-weight: 300; color: var(--text-primary); line-height: 1.2; margin-bottom: 16px; }
+    .section-title em { font-style: italic; font-weight: 400; }
+    .section-desc { font-size: 0.95rem; color: var(--text-light); max-width: 560px; margin: 0 auto; font-weight: 300; }
+    .divider-line { width: 60px; height: 1px; background: var(--accent-gold); margin: 18px auto 0; }
+
+    /* ── TOPIC TABS ── */
+    .topic-nav { display: flex; justify-content: center; gap: 6px; margin-bottom: 60px; flex-wrap: wrap; }
+    .topic-btn { padding: 10px 24px; border: 1px solid transparent; border-radius: 100px; background: none; font-family: var(--font-body); font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light); cursor: pointer; transition: all 0.3s var(--transition); font-weight: 400; }
+    .topic-btn:hover { color: var(--text-primary); border-color: var(--nude-300); }
+    .topic-btn.active { background: var(--nude-900); color: var(--cream); border-color: var(--nude-900); }
+
+    /* ── ARTICLE CARDS ── */
+    .articles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px; }
+
+    .article-card { background: white; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-sm); transition: all 0.4s var(--transition); opacity: 0; transform: translateY(20px); }
+    .article-card.visible { opacity: 1; transform: translateY(0); }
+    .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .article-card.visible:hover { transform: translateY(-4px); }
+
+    .article-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+
+    .article-img { position: relative; overflow: hidden; }
+    .article-card:not(.featured) .article-img { aspect-ratio: 16/10; }
+    .article-card.featured .article-img { min-height: 400px; }
+    .article-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--transition); }
+    .article-card:hover .article-img img { transform: scale(1.05); }
+
+    .article-tag-badge { position: absolute; top: 18px; left: 18px; background: var(--accent-gold); color: white; font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; font-weight: 400; }
+
+    .article-body { padding: 32px; display: flex; flex-direction: column; }
+    .article-card.featured .article-body { padding: 40px; justify-content: center; }
+
+    .article-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+    .article-cat { font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent-gold); font-weight: 400; }
+    .article-date { font-size: 0.76rem; color: var(--text-light); font-weight: 300; }
+    .article-read { font-size: 0.76rem; color: var(--text-light); font-weight: 300; }
+    .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--nude-400); }
+
+    .article-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--text-primary); line-height: 1.3; margin-bottom: 12px; transition: color 0.3s; }
+    .article-card.featured .article-title { font-size: 1.9rem; }
+    .article-card:hover .article-title { color: var(--accent-gold); }
+
+    .article-excerpt { font-size: 0.88rem; color: var(--text-light); font-weight: 300; line-height: 1.7; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .article-card.featured .article-excerpt { -webkit-line-clamp: 5; }
+
+    .article-read-more { font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-primary); font-weight: 400; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s; margin-top: auto; }
+    .article-read-more:hover { color: var(--accent-gold); }
+    .article-read-more span { transition: transform 0.3s; display: inline-block; }
+    .article-read-more:hover span { transform: translateX(4px); }
+
+    /* ── EXPANDED ARTICLE ── */
+    .article-expanded { display: none; background: white; border-radius: 20px; box-shadow: var(--shadow-lg); margin-bottom: 40px; overflow: hidden; animation: fadeUp 0.5s var(--transition); }
+    .article-expanded.active { display: block; }
+
+    .expanded-hero { position: relative; height: 380px; overflow: hidden; }
+    .expanded-hero img { width: 100%; height: 100%; object-fit: cover; }
+    .expanded-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(58,46,34,0.75) 0%, transparent 50%); display: flex; align-items: flex-end; padding: 40px; }
+    .expanded-hero-content { max-width: 700px; }
+    .expanded-hero-content .article-cat { color: var(--accent-gold); margin-bottom: 10px; display: block; }
+    .expanded-hero-content h2 { font-family: var(--font-display); font-size: 2.4rem; font-weight: 300; color: var(--cream); line-height: 1.2; }
+    .expanded-hero-content h2 em { font-style: italic; font-weight: 400; }
+
+    .expanded-body { max-width: 800px; margin: 0 auto; padding: 50px 40px 60px; }
+
+    .expanded-body h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; color: var(--text-primary); margin: 36px 0 16px; line-height: 1.3; }
+
+    .expanded-body p { font-size: 0.95rem; color: var(--text-secondary); font-weight: 300; line-height: 1.9; margin-bottom: 18px; }
+
+    .expanded-body .tip-box { background: var(--nude-100); border-left: 3px solid var(--accent-gold); padding: 20px 24px; border-radius: 0 12px 12px 0; margin: 28px 0; }
+    .expanded-body .tip-box strong { display: block; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 6px; font-weight: 500; }
+    .expanded-body .tip-box p { margin-bottom: 0; color: var(--text-secondary); }
+
+    .expanded-body .step-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 28px 0; }
+    .step-card { background: var(--nude-100); border-radius: 14px; padding: 24px; }
+    .step-number { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--accent-gold); line-height: 1; margin-bottom: 10px; }
+    .step-card h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; margin-bottom: 8px; }
+    .step-card p { font-size: 0.85rem; margin-bottom: 0; }
+
+    .expanded-body .checklist { list-style: none; margin: 20px 0; padding: 0; }
+    .expanded-body .checklist li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-secondary); font-weight: 300; display: flex; align-items: flex-start; gap: 12px; }
+    .expanded-body .checklist li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-gold); flex-shrink: 0; margin-top: 9px; }
+
+    /* Video embed */
+    .video-embed { margin: 32px 0; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-md); aspect-ratio: 16/9; }
+    .video-embed iframe { width: 100%; height: 100%; border: none; }
+
+    .expanded-close { position: sticky; top: 90px; float: right; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border); background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; z-index: 10; box-shadow: var(--shadow-sm); margin: -20px 0 0 0; }
+    .expanded-close:hover { background: var(--nude-200); }
+    .expanded-close svg { width: 16px; height: 16px; stroke: var(--text-primary); fill: none; stroke-width: 2; }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { background: var(--nude-100); }
+    .videos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .video-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); transition: all 0.4s var(--transition); }
+    .video-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .video-thumb { aspect-ratio: 16/9; overflow: hidden; position: relative; cursor: pointer; }
+    .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--transition); }
+    .video-card:hover .video-thumb img { transform: scale(1.05); }
+    .video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(58,46,34,0.3); transition: background 0.3s; }
+    .video-card:hover .video-play { background: rgba(58,46,34,0.5); }
+    .play-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.95); display: flex; align-items: center; justify-content: center; transition: transform 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .video-card:hover .play-icon { transform: scale(1.1); }
+    .play-icon svg { width: 20px; height: 20px; fill: var(--text-primary); margin-left: 2px; }
+    .video-info { padding: 20px; }
+    .video-info .article-cat { margin-bottom: 6px; display: block; }
+    .video-info h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; color: var(--text-primary); line-height: 1.3; margin-bottom: 6px; }
+    .video-info p { font-size: 0.82rem; color: var(--text-light); font-weight: 300; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter { background: var(--nude-900); padding: 70px 40px; text-align: center; }
+    .newsletter-inner { max-width: 560px; margin: 0 auto; }
+    .newsletter .section-tag { color: var(--accent-gold); }
+    .newsletter h2 { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 300; color: var(--cream); line-height: 1.25; margin-bottom: 14px; }
+    .newsletter h2 em { font-style: italic; font-weight: 400; }
+    .newsletter p { font-size: 0.9rem; color: var(--nude-400); font-weight: 300; margin-bottom: 30px; line-height: 1.7; }
+    .newsletter-form { display: flex; gap: 12px; max-width: 460px; margin: 0 auto; }
+    .newsletter-input { flex: 1; padding: 14px 22px; border: 1px solid var(--nude-700); border-radius: 100px; background: rgba(255,255,255,0.06); color: var(--cream); font-family: var(--font-body); font-size: 0.88rem; font-weight: 300; transition: border-color 0.3s; }
+    .newsletter-input::placeholder { color: var(--nude-600); }
+    .newsletter-input:focus { outline: none; border-color: var(--accent-gold); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; background: var(--accent-gold); color: white; text-decoration: none; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; border-radius: 100px; transition: all 0.4s var(--transition); border: none; cursor: pointer; font-family: var(--font-body); white-space: nowrap; }
+    .btn-primary:hover { background: var(--nude-700); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,162,101,0.3); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--nude-900); color: var(--nude-300); padding: 0 40px 30px; border-top: 1px solid var(--nude-800); }
+    .footer-inner { max-width: 1320px; margin: 0 auto; }
+    .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--nude-600); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s var(--transition); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .articles-grid { grid-template-columns: 1fr; }
+      .article-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .article-card.featured .article-img { min-height: 260px; }
+      .videos-grid { grid-template-columns: repeat(2, 1fr); }
+      .expanded-body .step-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner { padding: 0 24px; height: 70px; }
+      .logo img { height: 42px; width: 42px; }
+      .logo-text { font-size: 1.25rem; }
+      nav { position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background: var(--cream); flex-direction: column; justify-content: center; gap: 8px; padding: 40px; transition: right 0.4s var(--transition); box-shadow: -10px 0 40px rgba(0,0,0,0.1); z-index: 1000; }
+      nav.open { right: 0; }
+      nav a { font-size: 0.9rem; padding: 14px 20px; width: 100%; text-align: left; }
+      .mobile-toggle { display: block; }
+      .page-hero { height: 260px; }
+      .section { padding: 60px 24px; }
+      .articles-grid { gap: 24px; }
+      .article-body { padding: 24px; }
+      .expanded-hero { height: 240px; }
+      .expanded-body { padding: 36px 24px 48px; }
+      .expanded-body h3 { font-size: 1.35rem; }
+      .videos-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+      .topic-nav { gap: 4px; }
+      .topic-btn { padding: 8px 16px; font-size: 0.72rem; }
+      .newsletter { padding: 50px 24px; }
+      .newsletter-form { flex-direction: column; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">Aprende, inspírate y crea experiencias inolvidables</div>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">
+        <img src="https://i.ibb.co/6RNGswh4/logo.png" alt="Creations By Maydol">
+        <div class="logo-text">Creations By Maydol<span>Sorpresas & Charcutería</span></div>
+      </a>
+      <nav id="nav">
+        <a href="../index.html">Inicio</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="galeria.html">Galería</a>
+        <a href="consejos.html" class="active">Consejos</a>
+        <a href="#" class="nav-cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Carrito<span class="cart-badge">0</span>
+        </a>
+      </nav>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"><img src="https://i.ibb.co/0yZ46TpG/hero.jpg" alt="Consejos"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="page-hero-breadcrumb"><a href="../index.html">Inicio</a> &nbsp;/&nbsp; Consejos</div>
+      <h1 class="page-hero-title">Consejos & <em>Guías</em></h1>
+      <p class="page-hero-subtitle">Todo lo que necesitas saber para sorprender, armar tablas perfectas y crear momentos memorables.</p>
+    </div>
+  </section>
+
+  <!-- ═══ ARTICLES SECTION ═══ -->
+  <section class="section" id="articulos">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Blog de consejos</div>
+        <h2 class="section-title">Guías para <em>inspirarte</em></h2>
+        <p class="section-desc">Consejos prácticos, ideas creativas y tutoriales paso a paso para que cada creación sea especial.</p>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="topic-nav reveal">
+        <button class="topic-btn active" data-topic="all">Todos</button>
+        <button class="topic-btn" data-topic="charcuteria">Charcutería</button>
+        <button class="topic-btn" data-topic="sorpresas">Sorpresas</button>
+        <button class="topic-btn" data-topic="maridaje">Maridaje</button>
+        <button class="topic-btn" data-topic="conservacion">Conservación</button>
+        <button class="topic-btn" data-topic="presentacion">Presentación</button>
+      </div>
+
+      <!-- Expanded Article Slot -->
+      <div class="article-expanded" id="articleExpanded"></div>
+
+      <!-- Articles Grid -->
+      <div class="articles-grid" id="articlesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══ VIDEOS SECTION ═══ -->
+  <section class="section video-section" id="videos">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Video tutoriales</div>
+        <h2 class="section-title">Aprende <em>viendo</em></h2>
+        <p class="section-desc">Los mejores tutoriales en video para perfeccionar tus habilidades en charcutería y sorpresas.</p>
+        <div class="divider-line"></div>
+      </div>
+      <div class="videos-grid reveal" id="videosGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══ NEWSLETTER ═══ -->
+  <section class="newsletter">
+    <div class="newsletter-inner reveal">
+      <div class="section-tag">Mantente al día</div>
+      <h2>Recibe nuestros mejores <em>consejos</em></h2>
+      <p>Suscríbete para recibir guías exclusivas, ideas de temporada y promociones especiales directamente en tu correo.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Tu correo electrónico">
+        <button class="btn-primary">Suscribirme</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span>&copy; 2025 Creations By Maydol. Todos los derechos reservados.</span>
+        <span>Hecho con dedicación</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════
+    //  ARTICLES DATA
+    // ═══════════════════════════════════════
+    const articles = [
+      {
+        id: 1, featured: true, topic: 'charcuteria',
+        cat: 'Charcutería', date: 'Enero 2025', read: '8 min',
+        img: 'https://i.ibb.co/gMp8SCKQ/Img-Detalle1.jpg',
+        badge: 'Guía completa',
+        title: 'Cómo armar la tabla de charcutería perfecta: guía paso a paso',
+        excerpt: 'Descubre los secretos para crear una tabla de charcutería espectacular que impresione a todos tus invitados. Desde la selección de ingredientes hasta la presentación final.',
+        content: `
+          <h3>La base: eligiendo tu tabla</h3>
+          <p>El primer paso para una tabla espectacular es elegir la base adecuada. Las tablas de madera son la opción clásica y le dan un toque rústico-elegante a tu presentación. También puedes optar por platones de mármol para un look más sofisticado, o bandejas de pizarra para un estilo contemporáneo. La clave es que sea lo suficientemente grande para la cantidad de personas que vas a atender.</p>
+          <div class="tip-box">
+            <strong>Consejo experto</strong>
+            <p>Una tabla de 30×30 cm sirve para aproximadamente 4 personas. Agrega 10 cm por cada 2 personas adicionales. Si necesitas transportarla, una caja de madera con bordes bajos es ideal.</p>
+          </div>
+          <h3>Los 5 elementos esenciales</h3>
+          <p>Una tabla bien equilibrada combina cinco grupos de ingredientes que se complementan entre sí: quesos variados, carnes curadas, frutas y vegetales, panes y crackers, y dips o acompañamientos dulces. La variedad de texturas y sabores es lo que hace que cada bocado sea diferente y emocionante.</p>
+          <div class="step-grid">
+            <div class="step-card">
+              <div class="step-number">01</div>
+              <h4>Quesos variados</h4>
+              <p>Incluye al menos 3 tipos: un queso suave (Brie o Camembert), uno semicurado (Manchego o Gouda) y uno fuerte (Azul o Roquefort). Varía texturas entre cremosos, semiduros y duros.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">02</div>
+              <h4>Carnes curadas</h4>
+              <p>El corazón de la charcutería. Combina jamón serrano o ibérico, salami, prosciutto y pepperoni. Usa cantidades impares (3, 5 o 7 tipos) para un diseño más equilibrado visualmente.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">03</div>
+              <h4>Frutas y vegetales</h4>
+              <p>Aportan frescura y color. Las uvas, fresas, higos y manzanas son clásicos. Añade aceitunas y encurtidos para contraste salado. Los frutos rojos dan un toque de color vibrante.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">04</div>
+              <h4>Panes y crackers</h4>
+              <p>Son el vehículo perfecto para los demás ingredientes. Incluye pan artesanal cortado en rebanadas, galletas saladas de diferentes texturas y crostinis tostados.</p>
+            </div>
+          </div>
+          <h3>El montaje paso a paso</h3>
+          <p>Comienza colocando los recipientes pequeños (para dips, miel o mermelada) en la tabla para definir la estructura. Luego distribuye los quesos en diferentes puntos, cortando algunos en triángulos, cubitos o rebanadas tipo abanico. Después, acomoda las carnes doblándolas o enrollándolas entre los quesos. Finalmente, rellena los espacios vacíos con frutas, crackers y frutos secos. Termina decorando con hierbas frescas como romero o flores comestibles.</p>
+          <div class="tip-box">
+            <strong>Tip de presentación</strong>
+            <p>Haz flores con las rebanadas de salami: coloca 6-8 rodajas en fila superpuestas, dóblalas por la mitad y enróllalas desde un extremo. El resultado es una rosa de salami que eleva la estética de tu tabla.</p>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/vHHGmZRJn5g" title="Cómo armar una tabla de charcutería" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <h3>Porciones por persona</h3>
+          <ul class="checklist">
+            <li>Queso: 50-60 gramos por persona</li>
+            <li>Carnes curadas: 80-90 gramos por persona</li>
+            <li>Frutas frescas: un puñado generoso</li>
+            <li>Frutos secos y aceitunas: un puñado pequeño</li>
+            <li>Pan y crackers: 80-100 gramos por persona</li>
+            <li>Dips y untables: 1-2 cucharadas por persona</li>
+          </ul>
+        `
+      },
+      {
+        id: 2, featured: false, topic: 'sorpresas',
+        cat: 'Sorpresas', date: 'Febrero 2025', read: '6 min',
+        img: 'https://i.ibb.co/PvH81WKT/Img-Detalle3.jpg',
+        badge: '',
+        title: 'Ideas para crear la caja sorpresa perfecta',
+        excerpt: 'Aprende a diseñar cajas de regalo personalizadas que transmitan emociones y creen recuerdos duraderos. Desde la temática hasta los detalles finales.',
+        content: `
+          <h3>Definiendo la temática y el destinatario</h3>
+          <p>Toda gran sorpresa comienza con una pregunta: ¿a quién va dirigida? Conocer los gustos, intereses y personalidad de la persona te permitirá crear algo verdaderamente significativo. No se trata solo de llenar una caja con cosas bonitas, sino de contar una historia a través de cada detalle que incluyas.</p>
+          <h3>Elementos clave de una caja sorpresa exitosa</h3>
+          <ul class="checklist">
+            <li>Un detalle comestible: tabla de quesos mini, chocolates artesanales o dulces favoritos</li>
+            <li>Un elemento sensorial: vela aromática, flores secas o un producto de spa</li>
+            <li>Algo personalizado: tarjeta escrita a mano, foto impresa o mensaje especial</li>
+            <li>Un toque inesperado: un cupón de experiencia, entradas para algo o un regalo escondido</li>
+            <li>La presentación: papel de seda, lazos, confeti sutil y una caja de calidad</li>
+          </ul>
+          <div class="tip-box">
+            <strong>El poder de la personalización</strong>
+            <p>Los regalos más memorables son los que demuestran atención al detalle. Esconde notas entre los objetos, numera los regalos para que los abra en orden, o crea un "mapa del tesoro" con pistas que lo guíen por cada sorpresa dentro de la caja.</p>
+          </div>
+          <h3>Presentación que enamora</h3>
+          <p>La primera impresión lo es todo. Elige una caja resistente y estética: las cajas de cartón kraft dan un toque elegante y sostenible, mientras que las cajas de madera aportan una sensación premium y duradera. Forra el interior con papel de seda en colores que complementen la temática. Organiza los elementos en capas para crear anticipación al abrir: los detalles más pequeños arriba, la sorpresa principal al fondo.</p>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/oETgROk9sBE" title="Ideas para cajas sorpresa" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <h3>Ideas según la ocasión</h3>
+          <div class="step-grid">
+            <div class="step-card">
+              <div class="step-number">01</div>
+              <h4>Aniversario</h4>
+              <p>Mini tabla para 2, vela aromática, champagne mini, fotos impresas de momentos juntos y una carta manuscrita.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">02</div>
+              <h4>Cumpleaños</h4>
+              <p>Dulces favoritos, globos confeti, tarjeta de regalo, cupcake o mini torta y un detalle personalizado.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">03</div>
+              <h4>Día de la Madre</h4>
+              <p>Kit de spa, flores frescas o secas, chocolates finos, set de té y una tarjeta con mensaje emotivo.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">04</div>
+              <h4>Día del Padre</h4>
+              <p>Mini tabla de carnes y quesos, cerveza artesanal, snacks gourmet, accesorio personal y nota de agradecimiento.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 3, featured: false, topic: 'maridaje',
+        cat: 'Maridaje', date: 'Enero 2025', read: '5 min',
+        img: 'https://i.ibb.co/5hPwXyqY/Img-Detalle2.jpg',
+        badge: '',
+        title: 'Guía de maridaje: qué vino combinar con tu tabla',
+        excerpt: 'Aprende a seleccionar la bebida perfecta para acompañar cada tipo de queso y carne curada. Desde tintos robustos hasta espumantes delicados.',
+        content: `
+          <h3>El arte de combinar sabores</h3>
+          <p>El maridaje no se trata solo de reglas rígidas, sino de encontrar combinaciones que realcen los sabores de ambos elementos. Un buen vino puede transformar completamente la experiencia de una tabla de charcutería, y la clave está en equilibrar intensidades: ingredientes suaves con vinos ligeros, y sabores fuertes con vinos más robustos.</p>
+          <h3>Combinaciones clásicas</h3>
+          <ul class="checklist">
+            <li>Manchego curado + Cabernet Sauvignon: el tanino del vino complementa la intensidad del queso</li>
+            <li>Brie o Camembert + Chardonnay: la cremosidad del queso y la suavidad del vino blanco son un dúo perfecto</li>
+            <li>Queso azul + vino dulce o Porto: el contraste dulce-salado crea una explosión de sabor</li>
+            <li>Jamón serrano + Merlot: la suavidad del Merlot resalta la salinidad del jamón</li>
+            <li>Salami + Chianti o Tempranillo: vinos con notas especiadas que complementan las especias del salami</li>
+            <li>Prosciutto + Prosecco: las burbujas limpian el paladar entre bocados</li>
+          </ul>
+          <div class="tip-box">
+            <strong>¿No tomas alcohol?</strong>
+            <p>Las tablas también combinan excelente con jugo de uva espumante, aguas saborizadas con frutas cítricas, kombucha o té frío de frutas rojas. La clave es buscar bebidas que limpien el paladar y contrasten con la riqueza de los quesos y carnes.</p>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/UMaOKLpIHDg" title="Maridaje de vinos y quesos" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <h3>Temperatura de servicio</h3>
+          <p>El vino tinto se sirve idealmente entre 16-18°C, mientras que los blancos y rosados entre 8-12°C. El espumante se disfruta mejor bien frío, entre 6-8°C. Del mismo modo, los quesos y las carnes siempre se deben sacar del refrigerador al menos 30 minutos antes de servir para que sus sabores se desarrollen plenamente a temperatura ambiente.</p>
+        `
+      },
+      {
+        id: 4, featured: false, topic: 'conservacion',
+        cat: 'Conservación', date: 'Diciembre 2024', read: '4 min',
+        img: 'https://i.ibb.co/DfcQXpRK/Img-Detalle10.jpg',
+        badge: '',
+        title: 'Cómo conservar tu tabla fresca y segura',
+        excerpt: 'Consejos esenciales de seguridad alimentaria para que tu tabla se mantenga perfecta durante todo el evento, desde la preparación hasta el servicio.',
+        content: `
+          <h3>Seguridad alimentaria: lo que debes saber</h3>
+          <p>Una tabla de charcutería bien cuidada no solo se ve mejor sino que es más segura para tus invitados. Los alimentos perecederos como quesos y carnes no deben permanecer fuera del refrigerador por más de 2 horas, o 1 hora si la temperatura ambiente supera los 30°C.</p>
+          <h3>Preparación con anticipación</h3>
+          <ul class="checklist">
+            <li>Corta los quesos y lava las frutas hasta 1 día antes, guardándolos en recipientes herméticos</li>
+            <li>Los dips y untables pueden prepararse 2 días antes</li>
+            <li>Arma la tabla el mismo día del evento para máxima frescura</li>
+            <li>Si necesitas armar antes, cubre con film plástico y refrigera hasta 6 horas antes de servir</li>
+            <li>Saca la tabla del refrigerador 30 minutos antes de servir para alcanzar temperatura ambiente</li>
+          </ul>
+          <div class="tip-box">
+            <strong>Truco de profesional</strong>
+            <p>Si tu evento dura varias horas, prepara dos tablas más pequeñas en lugar de una grande. Sirve la primera y mantén la segunda refrigerada. Cuando la primera se vaya vaciando, reemplázala con la fresca. Así siempre tendrás ingredientes en condiciones óptimas.</p>
+          </div>
+          <h3>Almacenamiento de sobras</h3>
+          <p>Si quedaron ingredientes después del evento, sepáralos por tipo en recipientes herméticos. Los quesos duros duran hasta una semana adicional, mientras que los blandos deben consumirse en 2-3 días. Las carnes curadas selladas pueden durar otra semana en refrigeración. Nunca vuelvas a guardar ingredientes que estuvieron fuera más de 2 horas.</p>
+        `
+      },
+      {
+        id: 5, featured: false, topic: 'presentacion',
+        cat: 'Presentación', date: 'Noviembre 2024', read: '5 min',
+        img: 'https://i.ibb.co/mmCn1N7/Img-Detalle6.jpg',
+        badge: '',
+        title: 'Técnicas de presentación: haz que tu tabla parezca de revista',
+        excerpt: 'Aprende las técnicas que usan los profesionales para crear presentaciones impresionantes: desde doblar carnes hasta crear composiciones de color.',
+        content: `
+          <h3>El poder de la composición visual</h3>
+          <p>Una tabla hermosa es como un cuadro: necesita equilibrio de colores, texturas y formas. La regla básica es distribuir los colores de manera uniforme por toda la superficie. Si tienes frutos rojos en una esquina, coloca algo de color similar en la esquina opuesta para crear balance visual.</p>
+          <h3>Técnicas de corte y doblado</h3>
+          <div class="step-grid">
+            <div class="step-card">
+              <div class="step-number">01</div>
+              <h4>Rosa de salami</h4>
+              <p>Coloca 6-8 rodajas superpuestas en fila, dóblalas por la mitad y enróllalas desde un extremo. Obtienes una rosa elegante que eleva la estética.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">02</div>
+              <h4>Abanico de queso</h4>
+              <p>Corta quesos semiduros en rebanadas finas y acomódalas como un abanico o un mazo de cartas ligeramente separado.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">03</div>
+              <h4>Ribbons de prosciutto</h4>
+              <p>Toma cada loncha y dóblala como un acordeón suave creando ondulaciones. Agrupa varias para dar volumen y dimensión.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">04</div>
+              <h4>Toques finales</h4>
+              <p>Termina con ramitas de romero fresco, flores comestibles, gotas de miel y un espolvoreado de semillas para dar textura visual.</p>
+            </div>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/FVhGx7CB3XY" title="Presentación de charcutería" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="tip-box">
+            <strong>La regla de los números impares</strong>
+            <p>En diseño de alimentos, los números impares son visualmente más atractivos. Incluye 3, 5 o 7 tipos de carnes o quesos. Agrupa elementos en cantidades impares. Esto crea composiciones más naturales y menos rígidas.</p>
+          </div>
+        `
+      },
+      {
+        id: 6, featured: false, topic: 'sorpresas',
+        cat: 'Sorpresas', date: 'Octubre 2024', read: '4 min',
+        img: 'https://i.ibb.co/kVvcJGYN/Img-Detalle4.jpg',
+        badge: '',
+        title: '10 ideas de sorpresas para mamá que nunca fallan',
+        excerpt: 'Desde desayunos en la cama hasta cajas de spa personalizadas, estas ideas han sido las favoritas de nuestros clientes para sorprender a mamá.',
+        content: `
+          <h3>Sorpresas que tocan el corazón</h3>
+          <p>Mamá es esa persona que siempre da todo por los demás, y a veces olvida consentirse a sí misma. Crear una sorpresa pensada especialmente para ella no tiene que ser complicado ni costoso: lo importante es que refleje lo mucho que la conoces y la aprecias.</p>
+          <h3>Nuestras 10 ideas favoritas</h3>
+          <ul class="checklist">
+            <li>Box de spa en casa: jabones artesanales, bomba de baño, crema hidratante y vela aromática</li>
+            <li>Desayuno sorpresa: mini tabla de brunch con frutas, quesos suaves, croissants y jugo natural</li>
+            <li>Caja de recuerdos: álbum pequeño con fotos impresas, notas de cada miembro de la familia</li>
+            <li>Kit de té premium: selección de tés, taza artesanal, miel orgánica y galletas finas</li>
+            <li>Tarde de lectura: libro que le gustaría, manta suave, marcapáginas personalizado y chocolates</li>
+            <li>Jardín miniatura: suculenta en maceta decorada, herramientas mini y tarjeta con cuidados</li>
+            <li>Box gourmet: selección de chocolates finos, mermeladas artesanales y quesos premium</li>
+            <li>Kit de aromaterapia: aceites esenciales, difusor y guía de aromas para cada estado de ánimo</li>
+            <li>Experiencia compartida: cupón para una cena juntos, clase de cocina o actividad que disfruten</li>
+            <li>Sorpresa personalizada: combinación única basada en sus hobbies e intereses particulares</li>
+          </ul>
+          <div class="tip-box">
+            <strong>El detalle que marca la diferencia</strong>
+            <p>Siempre incluye una nota escrita a mano. En la era digital, las palabras escritas con tu puño y letra tienen un valor emocional inmenso. No necesitas ser poeta: un simple "gracias por todo" sincero es más poderoso que cualquier discurso elaborado.</p>
+          </div>
+        `
+      },
+      {
+        id: 7, featured: false, topic: 'charcuteria',
+        cat: 'Charcutería', date: 'Septiembre 2024', read: '5 min',
+        img: 'https://i.ibb.co/jZBDvWbG/Img-Detalle8.jpg',
+        badge: '',
+        title: 'Charcutería para principiantes: errores comunes y cómo evitarlos',
+        excerpt: 'Los errores más frecuentes al armar una tabla por primera vez y soluciones prácticas para que tu creación quede perfecta desde el primer intento.',
+        content: `
+          <h3>Errores que todos cometemos al inicio</h3>
+          <p>Armar una tabla de charcutería parece sencillo, pero hay algunos errores comunes que pueden arruinar la experiencia. La buena noticia es que todos son fáciles de corregir una vez que los conoces.</p>
+          <h3>Los 7 errores más comunes</h3>
+          <div class="step-grid">
+            <div class="step-card">
+              <div class="step-number">01</div>
+              <h4>Servir el queso frío</h4>
+              <p>Los quesos fríos pierden sabor. Sácalos del refrigerador 30 minutos antes para que alcancen su temperatura ideal y sus sabores se desplieguen completamente.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">02</div>
+              <h4>Poca variedad de texturas</h4>
+              <p>Incluir solo quesos duros o solo carnes similares hace la experiencia monótona. Mezcla cremosos con duros, suaves con intensos.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">03</div>
+              <h4>Olvidar los acompañamientos</h4>
+              <p>Sin dips, miel, mermeladas o mostazas, la tabla pierde dimensión. Estos elementos crean puentes de sabor entre los ingredientes principales.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">04</div>
+              <h4>Tabla demasiado vacía o saturada</h4>
+              <p>Encuentra el balance: la tabla debe verse abundante pero no abarrotada. Deja que cada ingrediente tenga su espacio pero sin grandes huecos vacíos.</p>
+            </div>
+          </div>
+          <ul class="checklist">
+            <li>Error 5: No cortar los quesos previamente, lo que dificulta que los invitados se sirvan cómodamente</li>
+            <li>Error 6: Ignorar las alergias de los invitados. Siempre pregunta de antemano y etiqueta ingredientes problemáticos</li>
+            <li>Error 7: Dejar la tabla fuera más de 2 horas. Esto compromete la frescura y puede ser un riesgo de seguridad alimentaria</li>
+          </ul>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/GJjHTF0bJ7I" title="Errores al armar una tabla" allowfullscreen loading="lazy"></iframe>
+          </div>
+        `
+      },
+      {
+        id: 8, featured: false, topic: 'presentacion',
+        cat: 'Presentación', date: 'Agosto 2024', read: '4 min',
+        img: 'https://i.ibb.co/m5KCKvJ6/Img-Dad3.jpg',
+        badge: '',
+        title: 'Tablas temáticas: ideas para cada celebración',
+        excerpt: 'Desde tablas navideñas hasta creaciones para baby showers, descubre cómo adaptar tu charcutería a cualquier temática o celebración.',
+        content: `
+          <h3>Una tabla para cada ocasión</h3>
+          <p>Las tablas de charcutería son increíblemente versátiles y pueden adaptarse a cualquier celebración con solo ajustar los ingredientes, colores y decoración. La temática no cambia la técnica básica, solo la paleta de colores y algunos ingredientes especiales.</p>
+          <h3>Ideas por celebración</h3>
+          <div class="step-grid">
+            <div class="step-card">
+              <div class="step-number">01</div>
+              <h4>Navidad y Año Nuevo</h4>
+              <p>Usa ramas de romero como árboles, coloca los ingredientes en forma de corona, añade arándanos rojos y quesos con especias navideñas. Acompaña con sidra espumante.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">02</div>
+              <h4>San Valentín</h4>
+              <p>Tabla en forma de corazón, usa fresas y frambuesas como protagonistas, incluye chocolates artesanales, y maridaje con vino rosado o champagne.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">03</div>
+              <h4>Baby Shower</h4>
+              <p>Colores pasteles en los acompañamientos, galletas decoradas con temática de bebé, quesos suaves y frutas cortadas en formas divertidas.</p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">04</div>
+              <h4>Halloween</h4>
+              <p>Colores naranja y negro, usa mandarinas, queso cheddar naranja, aceitunas negras y crea figuras espeluznantes con los embutidos.</p>
+            </div>
+          </div>
+          <div class="tip-box">
+            <strong>La versatilidad es infinita</strong>
+            <p>No te limites solo a lo salado: las tablas de postres y desayuno están en tendencia. Tablas de brunch con waffles mini, frutas y granola, o tablas dulces con chocolates, macarons y berries son opciones que sorprenden y deleitan.</p>
+          </div>
+        `
+      }
+    ];
+
+    // ═══════════════════════════════════════
+    //  VIDEOS DATA
+    // ═══════════════════════════════════════
+    const videos = [
+      { id: 'vHHGmZRJn5g', cat: 'Charcutería', title: 'Cómo armar una tabla de charcutería profesional', desc: 'Tutorial paso a paso completo' },
+      { id: 'oETgROk9sBE', cat: 'Sorpresas', title: 'Ideas creativas para cajas regalo', desc: 'Diseños y presentaciones únicas' },
+      { id: 'UMaOKLpIHDg', cat: 'Maridaje', title: 'Guía de maridaje: vinos y quesos', desc: 'Combinaciones que funcionan' },
+      { id: 'FVhGx7CB3XY', cat: 'Presentación', title: 'Técnicas para doblar carnes como un profesional', desc: 'Rosas de salami y más' },
+      { id: 'GJjHTF0bJ7I', cat: 'Charcutería', title: 'Errores comunes al armar tu tabla', desc: 'Evita estos errores de principiante' },
+      { id: 'fxiSM3wZjHQ', cat: 'Sorpresas', title: 'Desayuno sorpresa: cómo organizarlo', desc: 'Planificación y ejecución' },
+    ];
+
+    // ═══════════════════════════════════════
+    //  RENDER
+    // ═══════════════════════════════════════
+    const grid = document.getElementById('articlesGrid');
+    const expandedSlot = document.getElementById('articleExpanded');
+    let currentTopic = 'all';
+
+    function renderArticles() {
+      const filtered = currentTopic === 'all' ? articles : articles.filter(a => a.topic === currentTopic);
+
+      grid.innerHTML = filtered.map((a, i) => `
+        <div class="article-card${a.featured ? ' featured' : ''}" data-id="${a.id}" style="transition-delay: ${i * 0.07}s">
+          <div class="article-img">
+            <img src="${a.img}" alt="${a.title}" loading="lazy">
+            ${a.badge ? `<span class="article-tag-badge">${a.badge}</span>` : ''}
+          </div>
+          <div class="article-body">
+            <div class="article-meta">
+              <span class="article-cat">${a.cat}</span>
+              <span class="meta-dot"></span>
+              <span class="article-date">${a.date}</span>
+              <span class="meta-dot"></span>
+              <span class="article-read">${a.read} lectura</span>
+            </div>
+            <h3 class="article-title">${a.title}</h3>
+            <p class="article-excerpt">${a.excerpt}</p>
+            <a href="javascript:void(0)" class="article-read-more" onclick="expandArticle(${a.id})">Leer artículo <span>&rarr;</span></a>
+          </div>
+        </div>
+      `).join('');
+
+      requestAnimationFrame(() => {
+        grid.querySelectorAll('.article-card').forEach((c, i) => {
+          setTimeout(() => c.classList.add('visible'), i * 80);
+        });
+      });
+
+      expandedSlot.classList.remove('active');
+      expandedSlot.innerHTML = '';
+    }
+
+    function expandArticle(id) {
+      const a = articles.find(x => x.id === id);
+      if (!a) return;
+
+      expandedSlot.innerHTML = `
+        <div class="expanded-hero">
+          <img src="${a.img}" alt="${a.title}">
+          <div class="expanded-hero-overlay">
+            <div class="expanded-hero-content">
+              <span class="article-cat">${a.cat} &nbsp;&middot;&nbsp; ${a.date} &nbsp;&middot;&nbsp; ${a.read} lectura</span>
+              <h2>${a.title}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="expanded-body">
+          <button class="expanded-close" onclick="closeArticle()">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+          ${a.content}
+        </div>
+      `;
+
+      expandedSlot.classList.add('active');
+      expandedSlot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeArticle() {
+      expandedSlot.classList.remove('active');
+      setTimeout(() => { expandedSlot.innerHTML = ''; }, 300);
+    }
+
+    // Topic filter
+    document.querySelectorAll('.topic-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTopic = btn.dataset.topic;
+        renderArticles();
+      });
+    });
+
+    // Videos
+    const videosGrid = document.getElementById('videosGrid');
+    videosGrid.innerHTML = videos.map(v => `
+      <div class="video-card">
+        <div class="video-thumb" onclick="this.innerHTML='<iframe src=\\'https://www.youtube.com/embed/${v.id}?autoplay=1\\' allowfullscreen style=\\'width:100%;height:100%;border:none;\\'></iframe>'">
+          <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+          <div class="video-play"><div class="play-icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        </div>
+        <div class="video-info">
+          <span class="article-cat">${v.cat}</span>
+          <h3>${v.title}</h3>
+          <p>${v.desc}</p>
+        </div>
+      </div>
+    `).join('');
+
+    // ═══════════════════════════════════════
+    //  NAV, SCROLL, REVEAL
+    // ═══════════════════════════════════════
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navEl = document.getElementById('nav');
+    mobileToggle.addEventListener('click', () => { mobileToggle.classList.toggle('open'); navEl.classList.toggle('open'); });
+    navEl.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { mobileToggle.classList.remove('open'); navEl.classList.remove('open'); }));
+
+    window.addEventListener('scroll', () => { document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60); });
+
+    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    renderArticles();
+  </script>
+</body>
+</html>
