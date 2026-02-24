@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso Admin — Creations By Maydol</title>
+  <link rel="icon" href="https://i.ibb.co/6RNGswh4/logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --nude-100:#FAF6F1;--nude-200:#F3ECE2;--nude-300:#E8DDD0;--nude-400:#D4C4AE;
+      --nude-700:#8B7355;--nude-800:#6B573F;--nude-900:#4A3B2A;
+      --cream:#FFFBF5;--text-primary:#3A2E22;--text-secondary:#6B5D4F;--text-light:#9A8B7A;
+      --accent-gold:#C4A265;--accent-rose:#D4A59A;
+      --border:rgba(180,160,130,0.2);
+      --shadow-lg:0 8px 40px rgba(74,59,42,0.12);
+      --font-display:'Cormorant Garamond',Georgia,serif;
+      --font-body:'Jost',sans-serif;
+      --transition:cubic-bezier(0.4,0,0.2,1);
+    }
+    html{height:100%}
+    body{
+      font-family:var(--font-body);min-height:100vh;display:flex;
+      background:var(--nude-900);color:var(--text-primary);font-weight:300;
+    }
+
+    /* ── LEFT: IMAGE PANEL ── */
+    .login-image{
+      flex:1;position:relative;overflow:hidden;display:flex;align-items:flex-end;
+    }
+    .login-image img{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:brightness(0.45) saturate(0.8);
+    }
+    .login-image-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(58,46,34,0.85) 0%,rgba(58,46,34,0.2) 50%,rgba(58,46,34,0.4) 100%);
+    }
+    .login-image-content{
+      position:relative;z-index:2;padding:60px;max-width:520px;
+    }
+    .login-image-content .brand{
+      display:flex;align-items:center;gap:14px;margin-bottom:40px;
+    }
+    .login-image-content .brand img{
+      width:52px;height:52px;border-radius:50%;object-fit:contain;
+      position:static;filter:none;
+    }
+    .login-image-content .brand-name{
+      font-family:var(--font-display);font-size:1.5rem;font-weight:500;color:var(--cream);
+      line-height:1.2;
+    }
+    .login-image-content .brand-name span{
+      display:block;font-family:var(--font-body);font-size:0.62rem;
+      letter-spacing:4px;text-transform:uppercase;color:var(--accent-gold);font-weight:400;margin-top:3px;
+    }
+    .login-image-content h2{
+      font-family:var(--font-display);font-size:2.6rem;font-weight:300;
+      color:var(--cream);line-height:1.15;margin-bottom:16px;
+    }
+    .login-image-content h2 em{font-style:italic;font-weight:400;color:var(--accent-gold)}
+    .login-image-content p{
+      font-size:0.92rem;color:rgba(250,246,241,0.6);font-weight:300;line-height:1.8;
+    }
+
+    /* ── RIGHT: LOGIN FORM ── */
+    .login-form-panel{
+      width:520px;display:flex;flex-direction:column;justify-content:center;
+      padding:60px;background:var(--cream);position:relative;
+    }
+    .login-form-panel::before{
+      content:'';position:absolute;top:0;left:0;bottom:0;width:1px;
+      background:linear-gradient(to bottom,transparent,var(--accent-gold),transparent);
+    }
+
+    .login-back{
+      position:absolute;top:28px;left:28px;text-decoration:none;color:var(--text-light);
+      font-size:0.78rem;letter-spacing:1px;display:flex;align-items:center;gap:6px;
+      transition:color 0.3s;
+    }
+    .login-back:hover{color:var(--accent-gold)}
+    .login-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+    .form-header{margin-bottom:40px}
+    .form-tag{
+      font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;
+      color:var(--accent-gold);margin-bottom:12px;font-weight:400;
+    }
+    .form-title{
+      font-family:var(--font-display);font-size:2rem;font-weight:300;
+      line-height:1.2;margin-bottom:8px;
+    }
+    .form-subtitle{font-size:0.88rem;color:var(--text-light);font-weight:300}
+
+    .input-group{margin-bottom:22px}
+    .input-label{
+      display:block;font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;
+      color:var(--text-secondary);font-weight:500;margin-bottom:8px;
+    }
+    .input-wrapper{
+      position:relative;display:flex;align-items:center;
+    }
+    .input-wrapper svg{
+      position:absolute;left:16px;width:18px;height:18px;
+      stroke:var(--text-light);fill:none;stroke-width:1.5;pointer-events:none;
+      transition:stroke 0.3s;
+    }
+    .input-field{
+      width:100%;padding:14px 16px 14px 48px;
+      border:1px solid var(--border);border-radius:12px;
+      background:white;font-family:var(--font-body);font-size:0.9rem;
+      color:var(--text-primary);font-weight:300;transition:all 0.3s var(--transition);
+    }
+    .input-field::placeholder{color:var(--text-light)}
+    .input-field:focus{outline:none;border-color:var(--accent-gold);box-shadow:0 0 0 3px rgba(196,162,101,0.1)}
+    .input-field:focus + svg,.input-wrapper:focus-within svg{stroke:var(--accent-gold)}
+
+    .toggle-password{
+      position:absolute;right:14px;background:none;border:none;cursor:pointer;padding:4px;
+    }
+    .toggle-password svg{
+      position:static;width:18px;height:18px;stroke:var(--text-light);fill:none;stroke-width:1.5;
+      transition:stroke 0.2s;
+    }
+    .toggle-password:hover svg{stroke:var(--text-secondary)}
+
+    .form-options{
+      display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;
+    }
+    .remember{display:flex;align-items:center;gap:8px;cursor:pointer}
+    .remember input{
+      appearance:none;width:18px;height:18px;border:1.5px solid var(--nude-400);
+      border-radius:4px;cursor:pointer;transition:all 0.2s;position:relative;
+    }
+    .remember input:checked{background:var(--accent-gold);border-color:var(--accent-gold)}
+    .remember input:checked::after{
+      content:'';position:absolute;top:2px;left:5px;width:5px;height:9px;
+      border:solid white;border-width:0 1.5px 1.5px 0;transform:rotate(45deg);
+    }
+    .remember span{font-size:0.82rem;color:var(--text-secondary);font-weight:300}
+    .forgot{font-size:0.82rem;color:var(--accent-gold);text-decoration:none;font-weight:400;transition:color 0.3s}
+    .forgot:hover{color:var(--nude-700)}
+
+    .login-btn{
+      width:100%;padding:16px;background:var(--accent-gold);color:white;border:none;
+      border-radius:100px;font-family:var(--font-body);font-size:0.82rem;
+      letter-spacing:2px;text-transform:uppercase;font-weight:400;cursor:pointer;
+      transition:all 0.4s var(--transition);display:flex;align-items:center;justify-content:center;gap:10px;
+    }
+    .login-btn:hover{background:var(--nude-700);transform:translateY(-2px);box-shadow:0 8px 30px rgba(196,162,101,0.3)}
+    .login-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none}
+    .login-btn .spinner{
+      width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);
+      border-top-color:white;border-radius:50%;animation:spin 0.6s linear infinite;display:none;
+    }
+    .login-btn.loading .spinner{display:block}
+    .login-btn.loading .btn-text{display:none}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .login-error{
+      margin-top:16px;padding:12px 16px;background:rgba(212,165,154,0.15);
+      border:1px solid var(--accent-rose);border-radius:10px;
+      font-size:0.82rem;color:#8B4040;font-weight:300;display:none;
+      align-items:center;gap:8px;
+    }
+    .login-error.visible{display:flex}
+    .login-error svg{width:16px;height:16px;stroke:#8B4040;fill:none;stroke-width:2;flex-shrink:0}
+
+    .login-footer{
+      margin-top:40px;padding-top:24px;border-top:1px solid var(--border);
+      text-align:center;
+    }
+    .login-footer p{font-size:0.78rem;color:var(--text-light);font-weight:300}
+    .login-footer a{color:var(--accent-gold);text-decoration:none;font-weight:400}
+
+    /* ── MOBILE BRAND HEADER (shown only on mobile) ── */
+    .mobile-brand{
+      display:none;text-align:center;padding:32px 24px 0;
+    }
+    .mobile-brand img{
+      width:56px;height:56px;border-radius:50%;object-fit:contain;margin-bottom:14px;
+      box-shadow:0 4px 20px rgba(196,162,101,0.15);
+    }
+    .mobile-brand-name{
+      font-family:var(--font-display);font-size:1.4rem;font-weight:500;color:var(--text-primary);
+      line-height:1.2;
+    }
+    .mobile-brand-name span{
+      display:block;font-family:var(--font-body);font-size:0.6rem;
+      letter-spacing:4px;text-transform:uppercase;color:var(--accent-gold);font-weight:400;margin-top:4px;
+    }
+    .mobile-divider{
+      width:50px;height:1px;background:var(--accent-gold);margin:24px auto 0;opacity:0.4;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px){
+      .login-image{display:none}
+      .login-form-panel{
+        width:100%;max-width:100%;padding:40px 32px;
+        justify-content:flex-start;padding-top:20px;
+      }
+      .login-form-panel::before{display:none}
+      .mobile-brand{display:block}
+      .login-back{position:static;margin-bottom:8px}
+      .form-header{margin-bottom:32px}
+      .form-title{font-size:1.7rem}
+    }
+
+    @media(max-width:480px){
+      body{background:var(--cream)}
+      .login-form-panel{
+        padding:16px 22px;
+      }
+      .mobile-brand{padding:24px 20px 0}
+      .mobile-brand img{width:48px;height:48px}
+      .mobile-brand-name{font-size:1.2rem}
+      .mobile-divider{margin:18px auto 0}
+
+      .login-back{
+        margin-bottom:4px;font-size:0.74rem;
+      }
+      .form-header{margin-bottom:24px}
+      .form-tag{font-size:0.64rem;letter-spacing:3px;margin-bottom:8px}
+      .form-title{font-size:1.45rem;margin-bottom:6px}
+      .form-subtitle{font-size:0.82rem}
+
+      .input-group{margin-bottom:16px}
+      .input-label{font-size:0.68rem;margin-bottom:6px}
+      .input-field{padding:12px 14px 12px 42px;font-size:0.86rem;border-radius:10px}
+      .input-wrapper svg{left:14px;width:16px;height:16px}
+
+      .form-options{
+        flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:22px;
+      }
+      .remember span{font-size:0.78rem}
+      .forgot{font-size:0.78rem}
+
+      .login-btn{padding:14px;font-size:0.78rem;letter-spacing:1.5px}
+
+      .login-error{font-size:0.78rem;padding:10px 14px;border-radius:8px}
+
+      .login-footer{
+        margin-top:28px;padding-top:18px;
+      }
+      .login-footer p{font-size:0.72rem;line-height:1.6}
+      .login-footer p a{word-break:break-all}
+    }
+
+    /* Handle very short heights (landscape phones) */
+    @media(max-height:650px) and (max-width:960px){
+      .mobile-brand{padding:16px 20px 0}
+      .mobile-brand img{width:40px;height:40px;margin-bottom:8px}
+      .mobile-divider{margin:12px auto 0}
+      .form-header{margin-bottom:18px}
+      .form-title{font-size:1.3rem}
+      .input-group{margin-bottom:12px}
+      .input-field{padding:10px 12px 10px 40px}
+      .form-options{margin-bottom:16px}
+      .login-footer{margin-top:18px;padding-top:14px}
+    }
+
+    /* ── ANIMATIONS ── */
+    .form-header,.input-group,.form-options,.login-btn,.login-footer{
+      opacity:0;animation:fadeUp 0.5s var(--transition) forwards;
+    }
+    .form-header{animation-delay:0.15s}
+    .input-group:nth-child(2){animation-delay:0.25s}
+    .input-group:nth-child(3){animation-delay:0.35s}
+    .form-options{animation-delay:0.45s}
+    .login-btn{animation-delay:0.55s}
+    .login-footer{animation-delay:0.65s}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+
+  <!-- LEFT IMAGE PANEL -->
+  <div class="login-image">
+    <img src="https://i.ibb.co/0yZ46TpG/hero.jpg" alt="Creations By Maydol">
+    <div class="login-image-overlay"></div>
+    <div class="login-image-content">
+      <div class="brand">
+        <img src="https://i.ibb.co/6RNGswh4/logo.png" alt="Logo">
+        <div class="brand-name">Creations By Maydol<span>Panel de Administración</span></div>
+      </div>
+      <h2>Gestiona tu negocio con <em>elegancia</em></h2>
+      <p>Accede al panel de control para administrar pedidos, catálogo, galería y contenido de tu tienda en un solo lugar.</p>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="login-form-panel">
+    <div class="mobile-brand">
+      <img src="https://i.ibb.co/6RNGswh4/logo.png" alt="Creations By Maydol">
+      <div class="mobile-brand-name">Creations By Maydol<span>Panel de Administración</span></div>
+      <div class="mobile-divider"></div>
+    </div>
+
+    <a href="index.html" class="login-back">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver al sitio
+    </a>
+
+    <div class="form-header">
+      <div class="form-tag">Acceso administrativo</div>
+      <h1 class="form-title">Bienvenida de nuevo</h1>
+      <p class="form-subtitle">Ingresa tus credenciales para acceder al panel.</p>
+    </div>
+
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="input-group">
+        <label class="input-label">Correo electrónico</label>
+        <div class="input-wrapper">
+          <input type="email" class="input-field" id="emailInput" placeholder="admin@creationsbymaydol.com" required autocomplete="email">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Contraseña</label>
+        <div class="input-wrapper">
+          <input type="password" class="input-field" id="passwordInput" placeholder="Ingresa tu contraseña" required autocomplete="current-password">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <button type="button" class="toggle-password" onclick="togglePass()">
+            <svg viewBox="0 0 24 24" id="eyeIcon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label class="remember">
+          <input type="checkbox" checked>
+          <span>Recordarme</span>
+        </label>
+        <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button type="submit" class="login-btn" id="loginBtn">
+        <span class="btn-text">Iniciar sesión</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div class="login-error" id="loginError">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <span id="errorMsg">Credenciales incorrectas. Intenta de nuevo.</span>
+      </div>
+    </form>
+
+    <div class="login-footer">
+      <p>Credenciales de prueba: <a href="#"><span class="__cf_email__" data-cfemail="ec8d88818582ac8f9e898d988583829f8e95818d95888380c28f8381">[email&#160;protected]</span></a> / <strong>admin123</strong></p>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function togglePass() {
+      const input = document.getElementById('passwordInput');
+      const icon = document.getElementById('eyeIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+      } else {
+        input.type = 'password';
+        icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value;
+      const pass = document.getElementById('passwordInput').value;
+      const btn = document.getElementById('loginBtn');
+      const error = document.getElementById('loginError');
+
+      error.classList.remove('visible');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      setTimeout(() => {
+        if (email === 'admin@creationsbymaydol.com' && pass === 'admin123') {
+          window.location.href = 'html/admin.html';
+        } else {
+          btn.classList.remove('loading');
+          btn.disabled = false;
+          error.classList.add('visible');
+          document.getElementById('errorMsg').textContent = 'Credenciales incorrectas. Usa admin@creationsbymaydol.com / admin123';
+        }
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
